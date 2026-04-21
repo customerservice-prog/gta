@@ -1,0 +1,25 @@
+# Unreal Engine
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Build/
+Builds/
+.vs/
+.vscode/*.log
+*.VC.db
+*.opensdf
+*.sdf
+*.sln
+*.suo
+*.xcodeproj
+*.xcworkspace
+*.code-workspace
+*.aps
+*.VC.opendb
+
+# OS / tooling
+.DS_Store
+Thumbs.db
+*.swp
+*~

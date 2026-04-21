@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GTAWorld — open locally</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 52rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; color: #e8e8e8; background: #121418; }
+    h1 { font-size: 1.35rem; margin-top: 0; }
+    a { color: #7cb8ff; }
+    code { background: #1e222a; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; }
+    .box { background: #1a1e26; border: 1px solid #2a3140; border-radius: 8px; padding: 1rem 1.25rem; margin: 1rem 0; }
+    .muted { color: #9aa3b2; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <h1>GTAWorld — local</h1>
+  <p class="muted">Double‑click <strong>Play.bat</strong> in the project folder: if a packaged <code>GTAWorld.exe</code> exists it runs; otherwise you get a short dialog with the real options (Unreal cannot ship as a zero‑install click without that build).</p>
+
+  <div class="box">
+    <strong>Open the Unreal project (Windows)</strong>
+    <p><strong>Do not</strong> click <code>file:///</code> links from inside Cursor — they can open as a broken path (<code>c:%5C…</code>). Use one of these instead:</p>
+    <ul>
+      <li>Windows File Explorer: double‑click <code>GTAWorld.uproject</code> or <code>Open-GTAWorld-Local.bat</code> in this folder.</li>
+      <li>Cursor: <strong>Terminal → Run Task… → Open GTAWorld in Unreal Editor</strong>.</li>
+      <li>To <em>edit</em> the <code>.uproject</code> JSON in Cursor: <strong>Ctrl+P</strong>, type <code>GTAWorld.uproject</code>, Enter (opens from the workspace, not a chat link).</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <strong>After UE opens</strong>
+    <ol>
+      <li>Let C++ compile on first open if prompted.</li>
+      <li><strong>File → New Level → Empty Level</strong>, save as <code>Content/Maps/StartupMap</code>.</li>
+      <li>Add a Player Start, light, and floor with collision; then in <code>Config/DefaultEngine.ini</code> uncomment <code>GameDefaultMap</code> / <code>EditorStartupMap</code> (see comments in that file).</li>
+      <li>Press <strong>Play</strong> in the Editor to test locally (PIE).</li>
+    </ol>
+  </div>
+
+  <p class="muted">Serve this folder with: <code>python -m http.server 8765</code> — then open <code>http://127.0.0.1:8765/local.html</code></p>
+</body>
+</html>
