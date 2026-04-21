@@ -22,20 +22,17 @@ $shell = New-Object -ComObject WScript.Shell
     64
 )
 
-# Open with Epic's Unreal Version Selector when present — not the default app for .uproject (e.g. Cursor),
-# which only shows text/code.
+# Prefer the installed 5.4 editor directly (reliable). Version Selector needs /editor; bare path => "Invalid command line".
+$editor54 = Join-Path $env:ProgramFiles 'Epic Games\UE_5.4\Engine\Binaries\Win64\UnrealEditor.exe'
 $selector = @(
     "${env:ProgramFiles}\Epic Games\Launcher\Engine\Binaries\Win64\UnrealVersionSelector.exe",
     "${env:ProgramFiles(x86)}\Epic Games\Launcher\Engine\Binaries\Win64\UnrealVersionSelector.exe"
 ) | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
 
-if ($selector) {
-    Start-Process -FilePath $selector -ArgumentList "`"$uproject`""
+if (Test-Path -LiteralPath $editor54) {
+    Start-Process -FilePath $editor54 -ArgumentList $uproject
+} elseif ($selector) {
+    Start-Process -FilePath $selector -ArgumentList @('/editor', $uproject)
 } else {
-    $editor54 = "${env:ProgramFiles}\Epic Games\UE_5.4\Engine\Binaries\Win64\UnrealEditor.exe"
-    if (Test-Path -LiteralPath $editor54) {
-        Start-Process -FilePath $editor54 -ArgumentList "`"$uproject`""
-    } else {
-        Start-Process -FilePath $uproject
-    }
+    Start-Process -FilePath $uproject
 }

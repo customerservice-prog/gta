@@ -19,7 +19,8 @@ if (-not $isAdmin) {
     exit 0
 }
 
-$cmd = ('ftype Unreal.ProjectFile="{0}" "%1"' -f $selector)
+# Bare "%1" with Version Selector triggers "Invalid command line"; /editor is required for CLI opens.
+$cmd = ('ftype Unreal.ProjectFile="{0}" /editor "%1"' -f $selector)
 cmd /c $cmd
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 cmd /c 'assoc .uproject=Unreal.ProjectFile'
